@@ -34,19 +34,19 @@ namespace TaskApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaskModel>> Register([FromBody] TaskModel TaskModel)
+        public async Task<ActionResult<TaskModel>> Register([FromBody] TaskModel taskModel)
         {
-            TaskModel task = await _taskRepository.AddTask(TaskModel);
+            TaskModel task = await _taskRepository.AddTask(taskModel);
 
             return Ok(task);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<TaskModel>> Update([FromBody] TaskModel TaskModel,int id)
+        public async Task<ActionResult<TaskModel>> Update([FromBody] TaskModel taskModel,int id)
         {
-            TaskModel.Id = id;
+            taskModel.Id = id;
 
-            TaskModel task = await _taskRepository.UpdateTask(TaskModel,id);
+            TaskModel task = await _taskRepository.UpdateTask(taskModel,id);
 
             return Ok(task);
         }
