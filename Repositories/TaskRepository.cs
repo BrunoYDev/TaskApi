@@ -18,11 +18,15 @@ namespace TaskApi.Repositories
         }
         public async Task<TaskModel> RetrieveTask(int id)
         {
-            return await _dbContext.Tasks.FirstOrDefaultAsync(task => task.Id == id);
+            return await _dbContext.Tasks
+            .Include(task => task.User)
+            .FirstOrDefaultAsync(task => task.Id == id);
         }
         public async Task<List<TaskModel>> ReturnAllTasks()
         {
-            return await _dbContext.Tasks.ToListAsync();
+            return await _dbContext.Tasks
+            .Include(task => task.User)
+            .ToListAsync();
         }
         public async Task<TaskModel> AddTask(TaskModel task)
         {
